@@ -27,6 +27,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 // 一覧表示 getで受信
 app.get('/', (req, res) => {
+  console.log(req);
   client.connect(err => {
     const collection = client.db("todo").collection("task");
     collection.find().toArray(function(err, result) {
@@ -52,6 +53,7 @@ app.post('/todo/update', (req, res) => {
 })
 // inser postで受信
 app.post('/todo/insert', (req, res) => {
+  console.log(req);
   var where = req.body;
     client.connect(err => {
         const collection = client.db("todo").collection("task");
