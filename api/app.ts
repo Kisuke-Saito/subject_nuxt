@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = 7000
+const port = 4000
 const ObjectID = require('bson-objectid');
 const allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -19,6 +19,7 @@ const allowCrossDomain = function(req, res, next) {
     next()
   }
 }
+require('dotenv').config();
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -70,7 +71,7 @@ app.post('/todo/delete', (req, res) => {
 })
 
 const { MongoClient, LoggerLevel, ObjectId } = require('mongodb');
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(process.env.NODE_ENV, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
